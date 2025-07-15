@@ -1,0 +1,3 @@
+pycti
+shuffle_sdk
+requests # PyCTI'nin kullandığı HTTP kütüphanesi
