@@ -17,7 +17,8 @@ RUN pip install --prefix="/install" -r /requirements.txt
 # Final image stage
 FROM base
 COPY --from=builder /install /usr/local
-COPY src /app # src klasörü app klasörünün içinde kalacak
+COPY src /app 
+# src klasörü app klasörünün içinde kalacak
 
 # No specific binary dependencies needed for pycti based on typical usage.
 # If you encounter issues later, consider adding them here, e.g.:
