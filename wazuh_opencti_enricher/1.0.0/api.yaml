@@ -1,44 +1,53 @@
-walkoff_version: 1.0.0 # Standard bir Shuffle uygulaması için
-app_version: 1.0.0     # Uygulamanızın mevcut versiyonu
-name: wazuh_opencti_enricher
-environment: onprem    # Varsayılan ortam tipi
-description: Enrich Wazuh alerts with OpenCTI information
+walkoff_version: 1.0.0 # Standard for a Shuffle application
+app_version: 1.0.0     # Current version of your application
+name: wazuh_opencti_enricher_elshan_v2
+environment: onprem    # Default environment type
+description: A testing app to demonstrate input parsing from Shuffle UI.
 author: Elshan
 tags:
   - wazuh
   - opencti
   - enrichment
   - threat-intelligence
-categories:            # Kategoriler ekleyebiliriz
+categories:            # Categories for your app
   - Security
   - SOAR
-contact_info:          # İletişim bilgileri ekleyebiliriz
+contact_info:          # Contact information
   name: "Your Name/Organization"
   url: "https://github.com/YourGitHubUser/your-github-repo-name"
 authentication:
-  required: true # Kimlik doğrulama gereksinimi
+  required: true # Authentication requirement
   parameters:
     - name: opencti_url
       description: URL of the OpenCTI instance
-      example: "https://your-opencti.com" # Örnek değer
+      example: "https://your-opencti.com" # Example value
       required: true
-      schema: # Şema tanımı
+      schema: # Schema definition
         type: string
     - name: opencti_token
       description: OpenCTI API Token
-      example: "your_opencti_api_token" # Örnek değer
+      example: "your_opencti_api_token" # Example value
       required: true
-      schema: # Şema tanımı
+      schema: # Schema definition
         type: string
+        secret: true # Mark as secret for security
 actions:
-  - name: enrich_alert_with_opencti
-    description: Enriches a Wazuh alert with data from OpenCTI.
-    parameters: # input_fields yerine parameters kullanıyoruz ve schema ekliyoruz
+  - name: enrich_alert_with_opencti # This is the action name you'll see in the Shuffle UI
+    description: A test action to show how parameters are received, including IOC data.
+    executor: python3
+    parameters: # Using 'parameters' instead of 'input_fields' and adding schema
       - name: wazuh_alert_json
         description: The Wazuh alert in JSON format.
         required: true
-        schema: # Şema tanımı
-          type: string # JSON string olarak bekleniyor
-    returns: # Çıkış tanımı
+        multiline: true # Provides a larger text box in the UI
+        schema: # Schema definition
+          type: string # Expected as a JSON string
+      - name: ioc_data_from_parser # New parameter for IOC data from parser
+        description: The IOC data from the IoC_Parser module (e.g., {{$.ioc_parser.#}}). This will be a JSON string of a single IOC object.
+        required: true
+        multiline: true # This can also be a large JSON string
+        schema: # Schema definition
+          type: string # Expected as a JSON string
+    returns: # Output definition
       schema:
-        type: json # JSON objesi olarak dönecek
+        type: string # Will return as a JSON string
