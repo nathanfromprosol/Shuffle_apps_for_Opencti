@@ -1,6 +1,6 @@
 walkoff_version: 1.0.0 # Standard for a Shuffle application
 app_version: 1.0.0     # Current version of your application
-name: wazuh_opencti_enricher_elshan_v2
+name: iocs_opencti
 environment: onprem    # Default environment type
 description: A testing app to demonstrate input parsing from Shuffle UI.
 author: Elshan
