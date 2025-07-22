@@ -11,7 +11,7 @@ from walkoff_app_sdk.app_base import AppBase
 # --- Shuffle App Class ---
 class WazuhOpenCTIEnricherApp(AppBase):
     __version__ = "1.0.0" # Application version
-    app_name = "Wazuh OpenCTI Enricher" # Must match 'name' in api.yaml
+    app_name = "iocs_opencti" # Must match 'name' in api.yaml
 
     def __init__(self, redis, logger, console_logger=None):
         """
